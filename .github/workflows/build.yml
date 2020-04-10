@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [darwin, linux, windows]
+        os: [darwin, linux]
         include:
           - os: darwin
             runner: macos-latest
@@ -25,10 +25,6 @@ jobs:
             runner: ubuntu-latest
             no_docker: "false"
             pack_bin: pack
-          - os: windows
-            runner: [self-hosted, windows]
-            no_docker: "false"
-            pack_bin: pack.exe
     runs-on: ${{ matrix.runner }}
     env:
       PACK_BIN: ${{ matrix.pack_bin }}
