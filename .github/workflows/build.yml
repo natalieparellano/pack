@@ -15,7 +15,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [darwin, linux, windows]
+        os: [darwin, linux]
         include:
           - os: darwin
             runner: macos-latest
@@ -25,10 +25,6 @@ jobs:
             runner: ubuntu-latest
             no_docker: "false"
             pack_bin: pack
-          - os: windows
-            runner: [self-hosted, windows]
-            no_docker: "false"
-            pack_bin: pack.exe
     runs-on: ${{ matrix.runner }}
     env:
       PACK_BIN: ${{ matrix.pack_bin }}
@@ -49,8 +45,15 @@ jobs:
         run: make verify
       - name: Test
         run: make test
+      - name: Derive pack version from branch name
+        run: |
+          [[ $GITHUB_REF =~ ^refs\/heads\/release/(.*)$ ]] && version=${BASH_REMATCH[1]} || version=0.0.0
+          echo "::set-env name=PACK_VERSION::$version"
+        shell: bash
       - name: Build
         run: make build
+        env:
+          PACK_BUILD: ${{ github.run_number }}
       - uses: actions/upload-artifact@v1
         with:
           name: pack-${{ matrix.os }}
