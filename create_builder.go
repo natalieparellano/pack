@@ -327,7 +327,8 @@ func validateBuildpack(bp dist.Buildpack, source, expectedID, expectedBPVersion 
 
 func uriFromLifecycleVersion(version semver.Version, os string) string {
 	if os == "windows" {
-		return fmt.Sprintf("https://github.com/buildpacks/lifecycle/releases/download/v%s/lifecycle-v%s+windows.x86-64.tgz", version.String(), version.String())
+		return "https://github.com/buildpacks/lifecycle/releases/download/untagged-7312bda8176551243085/lifecycle-v0.10.0+windows.x86-64.tgz"
+		//return fmt.Sprintf("https://github.com/buildpacks/lifecycle/releases/download/v%s/lifecycle-v%s+windows.x86-64.tgz", version.String(), version.String())
 	}
 
 	return fmt.Sprintf("https://github.com/buildpacks/lifecycle/releases/download/v%s/lifecycle-v%s+linux.x86-64.tgz", version.String(), version.String())

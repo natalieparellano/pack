@@ -289,7 +289,7 @@ func (c *Client) Build(ctx context.Context, opts BuildOptions) error {
 		if lifecycleImageSupported(imgOS, lifecycleVersion) {
 			lifecycleImage, err := c.imageFetcher.Fetch(
 				ctx,
-				fmt.Sprintf("%s:%s", lifecycleImageRepo, lifecycleVersion.String()),
+				fmt.Sprintf("%s:%s", lifecycleImageRepo, "948827c"),
 				true,
 				opts.PullPolicy,
 			)
